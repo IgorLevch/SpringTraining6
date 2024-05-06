@@ -5,17 +5,14 @@ import java.util.List;
 
 public class MusicPlayer {
 
-    // Music music;  для домашки убираем
-
-    private List<Music>  musicList = new ArrayList<>(); // домашка
+     Music music;
 
 
 
 
 
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
+
+
 
     private String name;
     private int volume;
@@ -35,14 +32,14 @@ public class MusicPlayer {
     public void setVolume(int volume) {
         this.volume = volume;
     }
-  //  для домашки убираем:
- /*   public MusicPlayer(Music music) {
+
+    public MusicPlayer(Music music) {
         this.music = music;
     }
     // делаем сеттер:
     public void setMusic(Music music) {
         this.music = music;
-    }*/
+    }
 
     // делаем констр-р без аргументов:
     public MusicPlayer() {
@@ -53,10 +50,11 @@ public class MusicPlayer {
 //    }
 
 
+
     public void playMusic(){
-        for (Music music:musicList){
+
         System.out.println("Playing: " + music.play());
     }}
 
 
-   }
+
