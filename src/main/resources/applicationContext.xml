@@ -11,12 +11,17 @@
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
     <bean id ="musicBean"
-          class = "org.example.ClassicalMusic">
-
+          class = "org.example.ClassicalMusic"
+           init-method="doMyInit"
+            destroy-method="doMyDestroy"
+            scope="prototype"
+            factory-method="getClassicalMusic"
+            >
+        <property name="volume" value = "${musicBean.volume}"/>
     </bean>
 
 
-      <bean id = "musicPlayer"
+     <!-- <bean id = "musicPlayer"
           class = "org.example.MusicPlayer"
           scope="prototype">
           <property name="music" ref = "musicBean"/>
@@ -25,20 +30,20 @@
 
 
 
+//  на 8-м уроке данный бин не нужен.
 
 
+&lt;!&ndash;        Если пишем напрямую в данном файле:&ndash;&gt;
+&lt;!&ndash;        <property name="name" value = "Johnson"/>&ndash;&gt;
+&lt;!&ndash;        <property name="volume" value = "56"/>&ndash;&gt;
 
-<!--        Если пишем напрямую в данном файле:-->
-<!--        <property name="name" value = "Johnson"/>-->
-<!--        <property name="volume" value = "56"/>-->
 
-
-<!--        когда инжектим из файла musicPlayer.properties:-->
+&lt;!&ndash;        когда инжектим из файла musicPlayer.properties:&ndash;&gt;
         <property name="name" value = "${musicPlayer.name}"/>
         <property name="volume" value = "${musicPlayer.volume}"/>
 
     </bean>
-
+-->
 
 
 </beans>
