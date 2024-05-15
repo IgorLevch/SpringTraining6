@@ -41,13 +41,6 @@ public class MusicPlayer {
         this.music = music;
     }
 
-    // делаем констр-р без аргументов:
-    public MusicPlayer() {
-    }
-
-   // public void playMusic(){     //  это без домашки:
-//        System.out.println("Playing: " + music.play());
-//    }
 
 
 
