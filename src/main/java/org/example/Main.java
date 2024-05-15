@@ -4,22 +4,25 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
-    //создание инверсии управления через сеттер :
-    // не с пом-ю Джава кода, а с пом-ю Спринг ФРеймворка
-    //6 урок
+
     public static void main(String[] args) {
+
+        // используем аннотацию @Component
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext
                 ("applicationContext.xml");
 
+        Music music = context.getBean("rockMusic", Music.class);
+        Music music1 = context.getBean("classicalMusic", Music.class);
 
 
-        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+        MusicPlayer musicPlayer = new MusicPlayer(music);
+        MusicPlayer musicPlayer1 = new MusicPlayer(music1);
 
 
-        musicPlayer.playMusic();
-        System.out.println(musicPlayer.getName());
-        System.out.println(musicPlayer.getVolume());
+       musicPlayer.playMusic();
+       musicPlayer1.playMusic();
+
         context.close();
     }
 
