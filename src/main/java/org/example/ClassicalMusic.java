@@ -1,13 +1,23 @@
 package org.example;
 
-import jdk.jfr.DataAmount;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ClassicalMusic implements Music {
 
+    private List<String> clM = new ArrayList<>();
+
+    {
+        clM.add("Betkhoven");
+        clM.add("Chaikovsky");
+        clM.add("Mousrgsky");
+    }
+
     @Override
-    public String play() {
-       return "Bohemian Rapsody";
+    public List<String> play() {
+        return clM;
     }
 }

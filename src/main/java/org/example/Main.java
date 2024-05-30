@@ -2,22 +2,23 @@ package org.example;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Random;
+
 public class Main {
 
 
     public static void main(String[] args) {
 
-        // используем аннотацию @Autowired
+        // используем аннотацию @Qualifier
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext
                 ("applicationContext.xml");
 
+        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
-     /*   MusicPlayer musicPlayer = context.getBean("musicPlayer",MusicPlayer.class);
-        musicPlayer.playMusic();*/
+        musicPlayer.play(Genre.CLASSICAL);
+        musicPlayer.play(Genre.ROCK);
 
-        Computer comp = context.getBean("computer", Computer.class);
-        System.out.println(comp);
 
         context.close();
     }
