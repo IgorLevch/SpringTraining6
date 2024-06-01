@@ -1,62 +1,52 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+import java.util.Random;
+
+import static org.example.Genre.CLASSICAL;
+
+@Component
 public class MusicPlayer {
 
-    // Music music;  для домашки убираем
-
-    private List<Music>  musicList = new ArrayList<>(); // домашка
-
-
-
-
-
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
+    @Value("${musicPlayer.name}")
     private String name;
+    @Value("${musicPlayer.volume}")
     private int volume;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-  //  для домашки убираем:
- /*   public MusicPlayer(Music music) {
-        this.music = music;
-    }
-    // делаем сеттер:
-    public void setMusic(Music music) {
-        this.music = music;
-    }*/
-
-    // делаем констр-р без аргументов:
-    public MusicPlayer() {
+    Music music1;
+    Music music2;
+    @Autowired
+    public MusicPlayer(@Qualifier("rockMusic") Music music1,@Qualifier("classicalMusic") Music music2) {
+        this.music1 = music1;
+        this.music2 = music2;
     }
 
-   // public void playMusic(){     //  это без домашки:
-//        System.out.println("Playing: " + music.play());
-//    }
+
+    public void play(Genre genre){
+
+        Random  random  = new Random();
+        int r = random.nextInt(3);
+
+        if (genre == CLASSICAL){
+            System.out.println(music2.play().get(r));
+        }  else {
+            System.out.println(music1.play().get(r));
+        }
 
 
-    public void playMusic(){
-        for (Music music:musicList){
-        System.out.println("Playing: " + music.play());
-    }}
+    }
 
 
-   }
+}
