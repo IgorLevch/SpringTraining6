@@ -24,19 +24,6 @@ public class MusicPlayer {
         return volume;
     }
 
-    private ClassicalMusic classicalMusic;
-    private RockMusic rockMusic;
-
-    private PopMusic popMusic;
-
-
-
-    public MusicPlayer(ClassicalMusic classicalMusic, RockMusic rockMusic, PopMusic popMusic) {
-        this.classicalMusic = classicalMusic;
-        this.rockMusic = rockMusic;
-        this.popMusic = popMusic;
-
-    }
 
 
     /*public String playMusic(){
@@ -44,19 +31,19 @@ public class MusicPlayer {
         это было до ДЗ
     }*/
 
-    Random random = new Random();
-    int o = random.nextInt(3);
+  private List<Music> music;
 
-    public String play(Genre genre) {
-        if (genre == Genre.CLASSICAL_MUSIC) {
-           return classicalMusic.play();
-        } else if (genre == Genre.POP_MUSIC) {
-            return popMusic.play();
-        } else {
-          return  rockMusic.play();
-        }
+    public MusicPlayer(List<Music> music) {
+        this.music = music;
+    }
 
-    }}
+    Random r = new Random();
+
+    public String play(){
+
+        return "Playing: " + music.get(r.nextInt(music.size())).play()+"\nvolume :"+this.volume;
+    }
+}
 
 
 
