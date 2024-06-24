@@ -1,62 +1,70 @@
 package org.example;
 
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Value;
+
 import java.util.List;
+import java.util.Random;
 
 public class MusicPlayer {
 
-    // Music music;  для домашки убираем
-
-    private List<Music>  musicList = new ArrayList<>(); // домашка
-
-
-
-
-
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
+    @Value("${musicPlayer.name}")
     private String name;
+
+    @Value("${musicPlayer.volume}")
     private int volume;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-  //  для домашки убираем:
- /*   public MusicPlayer(Music music) {
-        this.music = music;
-    }
-    // делаем сеттер:
-    public void setMusic(Music music) {
+    ClassicalMusic classicalMusic;
+    PopMusic popMusic;
+    RockMusic rockMusic;
+
+    /*public String playMusic(){
+        return "Playing: " + classicalMusic.play();
+        это было до ДЗ
+    }*/
+
+/*  private List<Music> music;
+
+    public MusicPlayer(List<Music> music) {
         this.music = music;
     }*/
 
-    // делаем констр-р без аргументов:
-    public MusicPlayer() {
+    public MusicPlayer(ClassicalMusic classicalMusic, PopMusic popMusic, RockMusic rockMusic) {
+        this.classicalMusic = classicalMusic;
+        this.popMusic = popMusic;
+        this.rockMusic = rockMusic;
     }
 
-   // public void playMusic(){     //  это без домашки:
-//        System.out.println("Playing: " + music.play());
-//    }
+
+  /*  public String play(){
+
+        return "Playing: " + music.get(r.nextInt(music.size())).play()+"\nvolume :"+this.volume;
+    }*/
+
+    public String play(Genre genre){
+
+        if (genre == Genre.CLASSICAL_MUSIC){
+            return classicalMusic.play();
+        } else if (genre==Genre.ROCK_MUSIC) {
+            return rockMusic.play();
+        } else {
+            return popMusic.play();
+        }
+
+    }
+
+}
 
 
-    public void playMusic(){
-        for (Music music:musicList){
-        System.out.println("Playing: " + music.play());
-    }}
 
 
-   }
+
+
+
