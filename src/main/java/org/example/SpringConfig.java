@@ -26,14 +26,14 @@ public class SpringConfig {
     @Bean
     public PopMusic popMusic() {return new PopMusic();}
 
-    @Bean
+  /*  @Bean
     public List<Music> music(){
         return Arrays.asList(popMusic(), rockMusic(),classicalMusic());
-    }
+    }*/
 
     @Bean
     public MusicPlayer musicPlayer(){
-        return new MusicPlayer(music());
+        return new MusicPlayer(classicalMusic(), popMusic(), rockMusic());
     }
 
 

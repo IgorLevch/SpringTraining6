@@ -1,10 +1,7 @@
 package org.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,25 +21,45 @@ public class MusicPlayer {
         return volume;
     }
 
-
+    ClassicalMusic classicalMusic;
+    PopMusic popMusic;
+    RockMusic rockMusic;
 
     /*public String playMusic(){
         return "Playing: " + classicalMusic.play();
         это было до ДЗ
     }*/
 
-  private List<Music> music;
+/*  private List<Music> music;
 
     public MusicPlayer(List<Music> music) {
         this.music = music;
+    }*/
+
+    public MusicPlayer(ClassicalMusic classicalMusic, PopMusic popMusic, RockMusic rockMusic) {
+        this.classicalMusic = classicalMusic;
+        this.popMusic = popMusic;
+        this.rockMusic = rockMusic;
     }
 
-    Random r = new Random();
 
-    public String play(){
+  /*  public String play(){
 
         return "Playing: " + music.get(r.nextInt(music.size())).play()+"\nvolume :"+this.volume;
+    }*/
+
+    public String play(Genre genre){
+
+        if (genre == Genre.CLASSICAL_MUSIC){
+            return classicalMusic.play();
+        } else if (genre==Genre.ROCK_MUSIC) {
+            return rockMusic.play();
+        } else {
+            return popMusic.play();
+        }
+
     }
+
 }
 
 
