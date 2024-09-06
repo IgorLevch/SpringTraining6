@@ -1,6 +1,10 @@
 package org.example.springcourse.config;
 
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 public class MySpringMvcDispatcherServletInitiaizer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -20,5 +24,18 @@ public class MySpringMvcDispatcherServletInitiaizer extends AbstractAnnotationCo
     protected String[] getServletMappings() {
         return new String[]{"/"};  // это эквивалентно тому, что все http запросы от пользователя посылаем на
         // dispatcher servlet
+    }
+
+    @Override
+    public void onStartup(ServletContext aServletContext) throws ServletException {
+        super.onStartup(aServletContext);
+        registerHiddenFieldFilter(aServletContext);
+    }
+
+
+
+    private void registerHiddenFieldFilter(ServletContext aContext) {
+        aContext.addFilter("hiddenHttpMethodFilter",
+                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
     }
 }
