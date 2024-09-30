@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-                                                                                                    
+import java.sql.SQLException;
+
+
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
@@ -21,7 +23,7 @@ public class PeopleController {
     }
 
     @GetMapping()
-    public String index(Model model){
+    public String index(Model model) throws SQLException {
 
         model.addAttribute("people",personDao.index());
 
@@ -29,7 +31,7 @@ public class PeopleController {
 
     }
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model){
+    public String show(@PathVariable("id") int id, Model model) throws SQLException {
 
         model.addAttribute("person", personDao.show(id));
 
@@ -54,7 +56,7 @@ public class PeopleController {
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id ){
+    public String edit(Model model, @PathVariable("id") int id ) throws SQLException {
 
         model.addAttribute("person", personDao.show(id));
 
@@ -64,7 +66,7 @@ public class PeopleController {
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
-                         @PathVariable("id") int id){
+                         @PathVariable("id") int id) throws SQLException {
 
         if (bindingResult.hasErrors())
             return "people/edit";
@@ -76,7 +78,7 @@ public class PeopleController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id){
+    public String delete(@PathVariable("id") int id) throws SQLException {
 
         personDao.delete(id);
 
